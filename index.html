@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Patient project</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/Sidebar.css">
+    <link href="modules/bootstrap4.css" rel="stylesheet">
+    <link rel="stylesheet" href="modules/fontawesome-free-5.15.3-web/css/all.css">
+
+</head>
+
+<body>
+    <div class="body-container">
+        <div class="sidebar-wrapper">
+            <ul class="sidebar-list">
+                <li class="sidebar-patients">
+                    <a class="navigation-link sidebar-link" href="#" data-router-state="patient-list">Patients</a>
+                </li>
+                <li class="sidebar-users">
+                    <a class="navigation-link sidebar-link" href="#" data-router-state="users-list">Users</a>
+                </li>
+            </ul>
+        </div>
+        <div class="content-container container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel users-list">
+                        <h1>Users List</h1>
+                        <a type="button" class="navigation-link add-user btn btn-primary" data-router-state="user-edit"
+                            href="#">
+                            <i class="fas fa-plus p-1"></i>Add</a>
+                    </div>
+                    <div class="panel user-edit">
+                        <h1>User Edit</h1>
+                        <a type="button" class="navigation-link u-ok btn btn-success" data-router-state="users-list"
+                            href="#">ok</a>
+                        <a type="button" class="navigation-link u-cancle btn btn-danger" data-router-state="users-list"
+                            href="#">cancle</a>
+                    </div>
+                    <div class="panel patient-list">
+                        <h1 class="header">Patients</h1>
+                        <a type="button" class="update navigation-link btn
+                                  btn-primary add-patient" data-router-state="patient-edit" data-name="add" href="#"><i
+                                class="fas fa-plus p-1"></i>Add</a>
+
+
+
+                        <table class="patients-table table table-sm table-striped ">
+                            <thead class="patients-table-head">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>name</th>
+                                    <th>DOB</th>
+                                    <th>gender</th>
+                                    <th>email</th>
+                                    <th>Active</th>
+                                    <th>creationDate</th>
+                                    <th>CreatedBy</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="patients-table-body">
+                            </tbody>
+                        </table>
+                        <template class="patient-row-template">
+                            <tr data-id="{{ID}}">
+                                <td class="patientRow">{{ID}}</td>
+                                <td class="patientRow">{{fname}} {{mname}} {{lname}}</td>
+                                <td class="patientRow">{{DOB}}</td>
+                                <td class="patientRow">{{gender}}</td>
+                                <td class="patientRow">{{email}}</td>
+                                <td class="patientRow">{{Active}}</td>
+                                <td class="patientRow">{{creationDate}}</td>
+                                <td class="patientRow">{{CreatedBy}}</td>
+                                <td class="patientRow"> <a type="button" class="update patient-edit-button navigation-link btn
+                                      btn btn-primary" data-router-state="patient-edit" data-name="edit" href="#">
+                                        <i class="fas fa-pencil-alt"></i> Edit</a></td>
+                            </tr>
+                        </template>
+                    </div>
+
+
+                    <div class="panel patient-edit">
+                        <h1 class="header">patient: (new)</h1>
+                        <form action="" class="patientForm row was-validated">
+                            <div class="col-lg-4">
+
+                                <div class="row form-group">
+                                    <div class="col-lg-5">
+                                        <label for="fname" class="mb-1">First Name</label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <input type="text" id="fname" name="fname" class="form-control mb-1" required>
+                                        <span class="fnameErrorComment validationComment">please fill out this
+                                            field</span>
+
+
+                                    </div>
+                                </div>
+                                <div class="row  form-group">
+                                    <div class="col-lg-5">
+                                        <label for="mname" class="mb-1">Middle Name</label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <input type="text" id="mname" name="mname" class="form-control  mb-1" required>
+                                        <span class="mnameErrorComment validationComment">please fill out this
+                                            field</span>
+
+                                    </div>
+                                </div>
+                                <div class="row  form-group">
+                                    <div class="col-lg-5">
+                                        <label for="lname" class="mb-1">Last Name</label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <input type="text" id="lname" name="lname" class="form-control  mb-1" required>
+                                        <span class="lnameErrorComment validationComment">please fill out this
+                                            field</span>
+                                    </div>
+                                </div>
+                                <div class="row  form-group">
+                                    <div class="col-lg-5">
+                                        <label for="status" class="mb-1">Status</label>
+                                    </div>
+                                    <div class="col-lg-7 ">
+                                        <select id="status" name="status" class="custom-select mb-1" required>
+                                            <option value="active">Active</option>
+                                            <option name="active" value="notactive">not Active</option>
+                                        </select>
+                                        <span class="statusErrorComment validationComment">please fill out this
+                                            field</span>
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-5 form-check">
+                                        <label class="form-check-label mb-5" for="active">Active</label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <input type="checkbox" class="form-check-input mb-5 ml-1" id="active"
+                                            name="active">
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <button type="button" class=" btn btn-primary  p-save mt-5 px-4 "
+                                            data-router-state="patient-list"><i class="far fa-save pr-1"></i>
+                                            Save</button>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <button class="btn btn-danger navigation-link p-cancle mt-5 px-4"
+                                            data-router-state="patient-list"> Cancle</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-1"></div>
+                            <div class="col-lg-4">
+                                <div class="row form-group">
+                                    <div class="col-lg-5">
+                                        <label for="email" class="mb-1">Email</label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <input type="email" id="email" name="email" class="form-control mb-1" required>
+                                        <span class="emailErrorComment validationComment">please fill out this
+                                            field</span>
+
+                                    </div>
+                                </div>
+
+                                <div class="row form-group">
+                                    <div class="col-lg-5">
+                                        <label for="age" class="mb-1">Date of Birth</label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <input type="date" id="DOB" name="DOB" class="form-control mb-1" required>
+                                        <span class="DOBErrorComment validationComment">please select a date</span>
+
+                                    </div>
+                                </div>
+
+                                <div class="row form-group">
+                                    <div class="col-lg-5">
+                                        <label for="check" class="mb-1">Last check</label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <input type="date" id="check" name="check" class="form-control mb-1" required>
+                                        <span class="lastCheckErrorComment validationComment">please select a
+                                            date</span>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-lg-5">
+                                        <label for="gender" class="mt-1">Gender</label>
+
+                                    </div>
+                                    <div class="col-lg-7 gender">
+                                        <input type="radio" id="gender" name="1" value="male"> Male
+                                        <input type="radio" id="gender" name="2" value="female" class="ml-4">Female
+                                        <span class="genderErrorComment validationComment">please select a gender</span>
+
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-lg-5">
+                                        <label for="age" class="mb-1">Age</label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <input type="number" id="age" name="age" class="form-control mb-1" min="6"
+                                            max="130" required>
+                                        <span class="ageErrorComment validationComment">please fill out this
+                                            field</span>
+
+                                    </div>
+                                </div>
+                        </form>
+
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="modules/jquery-3.6.0.min.js"></script>
+    <script src="modules/bootstrap4.js"></script>
+    <script src="app/data/patientData_JSON.js"></script>
+    <script src="app/main.js"></script>
+    <script src="app/Patient/patient-list.js"></script>
+    <script src="app/Utiles/template-engine.js"></script>
+    <script src="app/Utiles/data-service.js"></script>
+    <script src="app/Patient/patient-edit.js"></script>
+    <script src="app/User/user-list.js"></script>
+    <script src="app/User/user-edit.js"></script>
+    <script src="app/Utiles/router-engine.js"></script>
+
+</body>
+
+</html>

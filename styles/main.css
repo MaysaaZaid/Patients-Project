@@ -1,0 +1,49 @@
+*{
+    box-sizing: border-box;
+}
+.body-container {
+    padding-left: 250px;   
+}
+.content-container {
+    width: 100%;
+    padding: 20px;
+    position: relative;
+}
+.patient-list {
+    width: 100%;
+    position: absolute;
+    padding: 15px;
+}
+.header{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.patients-table th,
+.patients-table td {
+    border: 1px solid #ddd;
+}
+.add-patient,.add-user,.cancle,.danger {
+  float: right;
+  margin: 20px;
+  padding: 0px 20px;
+}
+.patients-table th,
+.patients-table td {
+    text-align: center;
+}
+.edit {
+    padding: 0px 20px;
+}
+.patient-edit,
+.users-list,
+.user-edit
+
+{
+    display: none;
+}
+.validationComment{
+    display: none;
+    color: rgb(214, 29, 29);
+    font-size: small;
+    
+}
