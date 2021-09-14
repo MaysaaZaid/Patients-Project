@@ -5,12 +5,13 @@ class patientListClass {
         this.renderTable();
     }
 
-    open = () => {
+    show =()=>{
         this.renderTable();
+        routerEngine.navigate("patient-list")
     }
 
     renderTable = () => {
-        $(".patientRow").remove();
+        $('.patients-table-body').empty();
         var templateString = $(".patient-row-template").html();
         var patients = dataService.getAll();
         for (var i = 0; i < patients.length; i++) {
@@ -28,15 +29,13 @@ class patientListClass {
     }
 
     onEditPatientClick = (e) => {
-        patientEdit.formMode = "edit";
         var editRow = $(e.target).closest("tr");
         var ID = editRow.data("id");
-        patientEdit.patientId = ID;
-        patientEdit.open(ID);
+        patientEdit.show(ID);
     }
 
     onAddPatientClick() {
-        patientEdit.open();
+        patientEdit.show();
     }
 }
 

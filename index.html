@@ -17,10 +17,10 @@
         <div class="sidebar-wrapper">
             <ul class="sidebar-list">
                 <li class="sidebar-patients">
-                    <a class="navigation-link sidebar-link" href="#" data-router-state="patient-list">Patients</a>
+                    <a class="action-link sidebar-link" href="#" data-router-state="patient-list">Patients</a>
                 </li>
                 <li class="sidebar-users">
-                    <a class="navigation-link sidebar-link" href="#" data-router-state="users-list">Users</a>
+                    <a class="action-link sidebar-link" href="#" data-router-state="users-list">Users</a>
                 </li>
             </ul>
         </div>
@@ -29,20 +29,20 @@
                 <div class="col-lg-12">
                     <div class="panel users-list">
                         <h1>Users List</h1>
-                        <a type="button" class="navigation-link add-user btn btn-primary" data-router-state="user-edit"
+                        <a type="button" class="action-link add-user btn btn-primary" data-router-state="user-edit"
                             href="#">
                             <i class="fas fa-plus p-1"></i>Add</a>
                     </div>
                     <div class="panel user-edit">
                         <h1>User Edit</h1>
-                        <a type="button" class="navigation-link u-ok btn btn-success" data-router-state="users-list"
+                        <a type="button" class="action-link u-ok btn btn-success" data-router-state="users-list"
                             href="#">ok</a>
-                        <a type="button" class="navigation-link u-cancle btn btn-danger" data-router-state="users-list"
+                        <a type="button" class="action-link u-cancle btn btn-danger" data-router-state="users-list"
                             href="#">cancle</a>
                     </div>
                     <div class="panel patient-list">
                         <h1 class="header">Patients</h1>
-                        <a type="button" class="update navigation-link btn
+                        <a type="button" class="update action-link btn
                                   btn-primary add-patient" data-router-state="patient-edit" data-name="add" href="#"><i
                                 class="fas fa-plus p-1"></i>Add</a>
 
@@ -67,15 +67,15 @@
                         </table>
                         <template class="patient-row-template">
                             <tr data-id="{{ID}}">
-                                <td class="patientRow">{{ID}}</td>
-                                <td class="patientRow">{{fname}} {{mname}} {{lname}}</td>
-                                <td class="patientRow">{{DOB}}</td>
-                                <td class="patientRow">{{gender}}</td>
-                                <td class="patientRow">{{email}}</td>
-                                <td class="patientRow">{{Active}}</td>
-                                <td class="patientRow">{{creationDate}}</td>
-                                <td class="patientRow">{{CreatedBy}}</td>
-                                <td class="patientRow"> <a type="button" class="update patient-edit-button navigation-link btn
+                                <td>{{ID}}</td>
+                                <td>{{fname}} {{mname}} {{lname}}</td>
+                                <td>{{DOB}}</td>
+                                <td>{{gender}}</td>
+                                <td>{{email}}</td>
+                                <td>{{Active}}</td>
+                                <td>{{creationDate}}</td>
+                                <td>{{CreatedBy}}</td>
+                                <td> <a type="button" class="update patient-edit-button action-link btn
                                       btn btn-primary" data-router-state="patient-edit" data-name="edit" href="#">
                                         <i class="fas fa-pencil-alt"></i> Edit</a></td>
                             </tr>
@@ -93,7 +93,7 @@
                                         <label for="fname" class="mb-1">First Name</label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <input type="text" id="fname" name="fname" class="form-control mb-1" required>
+                                        <input type="text" id="fname"  name="fname" class="form-control fname mb-1" required>
                                         <span class="fnameErrorComment validationComment">please fill out this
                                             field</span>
 
@@ -105,7 +105,7 @@
                                         <label for="mname" class="mb-1">Middle Name</label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <input type="text" id="mname" name="mname" class="form-control  mb-1" required>
+                                        <input type="text" id="mname" name="mname" class="form-control mname mb-1" required>
                                         <span class="mnameErrorComment validationComment">please fill out this
                                             field</span>
 
@@ -116,7 +116,7 @@
                                         <label for="lname" class="mb-1">Last Name</label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <input type="text" id="lname" name="lname" class="form-control  mb-1" required>
+                                        <input type="text" id="lname" name="lname" class="form-control lname mb-1" required>
                                         <span class="lnameErrorComment validationComment">please fill out this
                                             field</span>
                                     </div>
@@ -126,9 +126,9 @@
                                         <label for="status" class="mb-1">Status</label>
                                     </div>
                                     <div class="col-lg-7 ">
-                                        <select id="status" name="status" class="custom-select mb-1" required>
-                                            <option value="active">Active</option>
-                                            <option name="active" value="notactive">not Active</option>
+                                        <select id="status" name="status" class="custom-select status mb-1" required>
+                                            <option value="1">Active</option>
+                                            <option name="active" value="0">not Active</option>
                                         </select>
                                         <span class="statusErrorComment validationComment">please fill out this
                                             field</span>
@@ -140,7 +140,7 @@
                                         <label class="form-check-label mb-5" for="active">Active</label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <input type="checkbox" class="form-check-input mb-5 ml-1" id="active"
+                                        <input type="checkbox"  id="active" class="form-check-input active mb-5 ml-1"
                                             name="active">
 
                                     </div>
@@ -152,7 +152,7 @@
                                             Save</button>
                                     </div>
                                     <div class="col-lg-6">
-                                        <button class="btn btn-danger navigation-link p-cancle mt-5 px-4"
+                                        <button class="btn btn-danger action-link p-cancle mt-5 px-4"
                                             data-router-state="patient-list"> Cancle</button>
                                     </div>
                                 </div>
@@ -165,7 +165,7 @@
                                         <label for="email" class="mb-1">Email</label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <input type="email" id="email" name="email" class="form-control mb-1" required>
+                                        <input type="email" id="email" name="email" class="form-control email mb-1" required>
                                         <span class="emailErrorComment validationComment">please fill out this
                                             field</span>
 
@@ -177,7 +177,7 @@
                                         <label for="age" class="mb-1">Date of Birth</label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <input type="date" id="DOB" name="DOB" class="form-control mb-1" required>
+                                        <input type="date" id="DOB" name="DOB" class="form-control DOB mb-1" required>
                                         <span class="DOBErrorComment validationComment">please select a date</span>
 
                                     </div>
@@ -188,7 +188,7 @@
                                         <label for="check" class="mb-1">Last check</label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <input type="date" id="check" name="check" class="form-control mb-1" required>
+                                        <input type="date" id="check" name="check" class="form-control check mb-1" required>
                                         <span class="lastCheckErrorComment validationComment">please select a
                                             date</span>
 
@@ -202,8 +202,8 @@
 
                                     </div>
                                     <div class="col-lg-7 gender">
-                                        <input type="radio" id="gender" name="1" value="male"> Male
-                                        <input type="radio" id="gender" name="2" value="female" class="ml-4">Female
+                                        <input type="radio" id="gender" class="gender" name="1" value="male"> Male
+                                        <input type="radio" id="gender" class="gender" name="2" value="female" class="ml-4">Female
                                         <span class="genderErrorComment validationComment">please select a gender</span>
 
                                     </div>
@@ -213,7 +213,7 @@
                                         <label for="age" class="mb-1">Age</label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <input type="number" id="age" name="age" class="form-control mb-1" min="6"
+                                        <input type="number" id="age" name="age" class="form-control age mb-1" min="6"
                                             max="130" required>
                                         <span class="ageErrorComment validationComment">please fill out this
                                             field</span>

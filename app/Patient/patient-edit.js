@@ -8,118 +8,63 @@ class patientEditClass {
         $(".p-save").click(this.onSaveButtonClick);
     }
 
-    open = (ID) => {
-        if (ID == undefined) {
+    show = (ID) => {
+        if (!ID) {
+            this.formMode = "new";
+            this.patientId = null;
             this.resetDataForm();
         } else {
-            var patient = dataService.getPatientById(ID);
-            this.loadData(patient);
+            this.formMode = "edit";
+            this.patientId = ID;
+            const patient = dataService.get(ID);
+            this.loadFormControls(patient);
         }
         routerEngine.navigate("patient-edit")
     }
 
     onSaveButtonClick = () => {
-        var patient = this.getData();
-        var isValidate = this.validateForm(patient);
-        debugger;
-        if (isValidate == false) {
+        const patient = this.getFormControlsData();
+        if (!this.validateForm(patient)) {
             return (false);
+        }
+        if (this.formMode == "edit") {
+            dataService.update(patient, this.patientId);
         } else {
-            if (this.formMode == "edit") {
-                dataService.update(this.patientId);
-            } else {
-                dataService.add(patient);
-            }
+            dataService.add(patient);
         }
-    }
-    validateForm = (patient) => {
-
-        var isValidate = true;
-
-        $(".validationComment").hide();
-        if (patient.age == "" || isNaN(patient.age) || patient.age < 6 || patient.age > 130) {
-            $(".ageErrorComment").show();
-            isValidate = false;
-        }
-        if (patient.fname == "") {
-            $(".fnameErrorComment").show();
-            isValidate = false;
-        }
-        if (patient.mname == "") {
-            $(".mnameErrorComment").show();
-            isValidate = false;
-        }
-        if (patient.lname == "") {
-            $(".lnameErrorComment").show();
-            isValidate = false;
-        }
-        if (patient.status == "") {
-            $(".statusErrorComment").show();
-            isValidate = false;
-        }
-        if (patient.email == "") {
-            $(".emailErrorComment").show();
-            isValidate = false;
-        }
-        if (patient.DOB == "") {
-            $(".DOBErrorComment").show();
-            isValidate = false;
-        }
-        if (patient.lastCheck == "") {
-            $(".lastCheckErrorComment").show();
-            isValidate = false;
-        }
-        if (patient.gender == "") {
-            $(".genderErrorComment").show();
-            isValidate = false;
-        }
-
-        return (isValidate)
+        patientList.show();
     }
 
-
-    loadData = (patient) => {
-        $("#fname").val(patient.fname);
-        $("#mname").val(patient.mname);
-        $("#lname").val(patient.lname);
-        var status = patient.status;
-        if (status == 0) {
-            $("#status").val("notactive");
-        } else {
-            $("#status").val("active");
-        }
-        var patientActive = patient.Active;
-        if (patientActive == true) {
-            $(".form-check-input").attr('checked', true);
-        } else {
-            $(".form-check-input").attr('checked', false);
-        }
-        $("#email").val(patient.email);
-        var date = patient.DOB;
-        var age = date.toISOString().substr(0, 10);
-        $("#DOB").val(age);
-        var lastCheck = patient.lastCheck;
-        var lastCheckDate = lastCheck.toISOString().substr(0, 10);
-        $("#check").val(lastCheckDate);
-        var gender = patient.gender;
+    loadFormControls = (patient) => {
+        $(".fname").val(patient.fname);
+        $(".mname").val(patient.mname);
+        $(".lname").val(patient.lname);
+        $(".status").val(patient.status);
+        $(".form-check-input").attr('checked',patient.Active);
+        $(".email").val(patient.email);
+        let date = patient.DOB;
+        date = date.toISOString().substr(0, 10);
+        $(".DOB").val(date);
+        let lastCheckDate = patient.lastCheck;
+        lastCheckDate = lastCheckDate.toISOString().substr(0, 10);
+        $(".check").val(lastCheckDate);
+        const gender = patient.gender;
         if (gender == "1") {
             $("[name='1']").attr('checked', true);
         } else {
             $("[name='2']").attr('checked', true);
-
         }
     }
 
-    getData = () => {
-
-        var patientFirstName = $("#fname").val();
-        var patientMiddleName = $("#mname").val();
-        var patientLastName = $("#lname").val();
-        var patientStatus = $("#status").val();
-        var patientEmail = $("#email").val();
-        var patientAge = $("#age").val();
-        var gender = $("input[type='radio']:checked").val();
-        var patientGender = "";
+    getFormControlsData = () => {
+        const patientFirstName = $(".fname").val();
+        const patientMiddleName = $(".mname").val();
+        const patientLastName = $(".lname").val();
+        const patientStatus = $(".status").val();
+        const patientEmail = $(".email").val();
+        const patientAge = $(".age").val();
+        const gender = $("input[type='radio']:checked").val();
+        let patientGender = "";
         if (gender == "male") {
             patientGender = "1";
         } else if (gender == "female") {
@@ -127,38 +72,78 @@ class patientEditClass {
         } else {
             patientGender = "";
         }
-        var patientDOB = $("#DOB").val();
-        var patientLastCheck = $("#check").val();
-        var patientActive = $("input[name=active]:checked").val();
+        const patientDOB = $(".DOB").val();
+        const patientLastCheck = $(".check").val();
+        let patientActive = $("input[name=active]:checked").val();
         if (patientActive == "on") {
             patientActive = "true";
         } else {
             patientActive = "false";
         }
-        var newPatient = {
+        const newPatient = {
             fname: patientFirstName, mname: patientMiddleName, lname: patientLastName,
             DOB: patientDOB, gender: patientGender, email: patientEmail, age: patientAge, lastCheck: patientLastCheck,
             status: patientStatus, Active: patientActive, creationDate: patientLastCheck, CreatedBy: 1
         };
-        return (newPatient)
+        return newPatient
     }
-
-
     resetDataForm = () => {
-        $("#fname").val("");
-        $("#mname").val("");
-        $("#lname").val("");
-        $("#status").val("active");
+        $(".fname").val("");
+        $(".mname").val("");
+        $(".lname").val("");
+        $(".status").val("active");
         $(".form-check-input").attr('checked', false);
-        $("#email").val("");
-        $("#DOB").val("");
-        $("#check").val("");
+        $(".email").val("");
+        $(".DOB").val("");
+        $(".check").val("");
         $("[name='1']").attr('checked', false);
         $("[name='2']").attr('checked', false);
     }
+    validateForm = (patient) => {
+        const isValid = true;
+        $(".validationComment").hide();
+        if (patient.age == "" || isNaN(patient.age) || patient.age < 6 || patient.age > 130) {
+            $(".ageErrorComment").show();
+            isValid = false;
+        }
+        if (patient.fname == "") {
+            $(".fnameErrorComment").show();
+            isValid = false;
+        }
+        if (patient.mname == "") {
+            $(".mnameErrorComment").show();
+            isValid = false;
+        }
+        if (patient.lname == "") {
+            $(".lnameErrorComment").show();
+            isValid = false;
+        }
+        if (patient.status == "") {
+            $(".statusErrorComment").show();
+            isValid = false;
+        }
+        if (patient.email == "") {
+            $(".emailErrorComment").show();
+            isValid = false;
+        }
+        if (patient.DOB == "") {
+            $(".DOBErrorComment").show();
+            isValid = false;
+        }
+        if (patient.lastCheck == "") {
+            $(".lastCheckErrorComment").show();
+            isValid = false;
+        }
+        if (patient.gender == "") {
+            $(".genderErrorComment").show();
+            isValid = false;
+        }
+
+        return isValid
+    }
 }
 
-var patientEdit = new patientEditClass();
+const patientEdit = new patientEditClass();
 
 
 

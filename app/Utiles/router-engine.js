@@ -1,17 +1,14 @@
 class routerEngineClass {
     init = () => {
-        this.initNavigation();
+        $(".action-link").click(
+            this.onActionLinkClick
+        )
     }
     navigate = (panel) => {
         this.hideAll();
         this.showPanel(panel);
     }
-    initNavigation = () => {
-        $(".navigation-link").click(
-            this.showPage
-        )
-    };
-    showPage = (e) => {
+    onActionLinkClick = (e) => {
         var str = $(e.target).data("router-state");
         this.hideAll();
         this.showPanel(str);

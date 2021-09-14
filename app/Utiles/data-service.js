@@ -2,70 +2,46 @@ class dataServiceClass {
     init = () => {
 
     }
-    getIndexById = (ID) => {
-        var patient = "";
-        for (var i = 0; i < patientsData.length; i++) {
-            if (ID == patientsData[i].ID) {
-                patient = patientsData[i];
-                break;
-            }
-        }
-        return (i)
+    getAll() {
+        return patientsData;
     }
-    getPatientById = (ID) => {
-        var patient = "";
-        for (var i = 0; i < patientsData.length; i++) {
-            if (ID == patientsData[i].ID) {
-                patient = patientsData[i];
-                break;
-            }
-        }
-        return (patient)
+    get = (ID) => {
+        return patientsData.find(element => element.ID == ID);
     }
+    update = (newPatient, newPatientID) => {
+        var oldPatient = this.get(newPatientID)
+        oldPatient.fname = newPatient.fname;
+        oldPatient.mname = newPatient.mname;
+        oldPatient.lname = newPatient.lname;
+        oldPatient.DOB = newPatient.DOB;
+        oldPatient.gender = newPatient.gender;
+        oldPatient.email = newPatient.email;
+        oldPatient.lastCheck = newPatient.lastCheck;
+        oldPatient.status = newPatient.status;
+        oldPatient.Active = newPatient.Active;
+        oldPatient.creationDate = newPatient.creationDate;
+        oldPatient.CreatedBy = newPatient.CreatedBy;
+    }
+
     add = (patient) => {
-        debugger;
         var newPatientId = this.getNewId();
         patient.ID = newPatientId;
         patientsData.push(patient);
-        patientList.open();
-        routerEngine.navigate("patient-list")
+    }
+
+    getIndexById = (ID) => {
+        var patient = patientsData.find(element => element.ID == ID);
+        return patientsData.indexOf(patient)
     }
 
     getNewId = () => {
-
         var max = patientsData[0].ID;
-        for (var i = 0; i < patientsData.length; i++) {
-            if (max < patientsData[i].ID) {
-                max = patientsData[i].ID;
+        patientsData.forEach(element => {
+            if (max < element.ID) {
+                max = element.ID;
             }
-        }
-        return (max + 1)
-    }
-
-    update = (patientId) => {
-        patientEdit.formMode = null;
-        var ID = patientId;
-        var oldPatient = this.getPatientById(ID);
-        var modifiedPatient = patientEdit.getData();
-        oldPatient.ID = ID;
-        oldPatient.fname = modifiedPatient.fname;
-        oldPatient.mname = modifiedPatient.mname;
-        oldPatient.lname = modifiedPatient.lname;
-        oldPatient.DOB = modifiedPatient.DOB;
-        oldPatient.gender = modifiedPatient.gender;
-        oldPatient.email = modifiedPatient.email;
-        oldPatient.lastCheck = modifiedPatient.lastCheck;
-        oldPatient.status = modifiedPatient.status;
-        oldPatient.Active = modifiedPatient.Active;
-        oldPatient.creationDate = modifiedPatient.creationDate;
-        oldPatient.CreatedBy = modifiedPatient.CreatedBy;
-        patientList.open();
-        routerEngine.navigate("patient-list");
-
-    }
-
-    getAll() {
-        return (patientsData);
+        });
+        return max + 1
     }
 }
 var dataService = new dataServiceClass();
