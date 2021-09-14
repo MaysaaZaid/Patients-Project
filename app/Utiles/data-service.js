@@ -9,7 +9,7 @@ class dataServiceClass {
         return patientsData.find(element => element.ID == ID);
     }
     update = (newPatient, newPatientID) => {
-        var oldPatient = this.get(newPatientID)
+        const oldPatient = this.get(newPatientID)
         oldPatient.fname = newPatient.fname;
         oldPatient.mname = newPatient.mname;
         oldPatient.lname = newPatient.lname;
@@ -24,18 +24,18 @@ class dataServiceClass {
     }
 
     add = (patient) => {
-        var newPatientId = this.getNewId();
+        const newPatientId = this.getNewId();
         patient.ID = newPatientId;
         patientsData.push(patient);
     }
 
     getIndexById = (ID) => {
-        var patient = patientsData.find(element => element.ID == ID);
+        const patient = patientsData.find(element => element.ID == ID);
         return patientsData.indexOf(patient)
     }
 
     getNewId = () => {
-        var max = patientsData[0].ID;
+        let max = patientsData[0].ID;
         patientsData.forEach(element => {
             if (max < element.ID) {
                 max = element.ID;
@@ -44,4 +44,4 @@ class dataServiceClass {
         return max + 1
     }
 }
-var dataService = new dataServiceClass();
+const dataService = new dataServiceClass();

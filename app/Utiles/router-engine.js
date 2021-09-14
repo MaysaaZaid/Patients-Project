@@ -9,7 +9,7 @@ class routerEngineClass {
         this.showPanel(panel);
     }
     onActionLinkClick = (e) => {
-        var str = $(e.target).data("router-state");
+        const str = $(e.target).data("router-state");
         this.hideAll();
         this.showPanel(str);
     }
@@ -20,4 +20,4 @@ class routerEngineClass {
         $("." + str).show();
     }
 }
-var routerEngine = new routerEngineClass();
+const routerEngine = new routerEngineClass();
