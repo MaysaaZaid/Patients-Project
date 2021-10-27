@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/Sidebar.css">
-    <link href="modules/bootstrap4.css" rel="stylesheet">
-    <link rel="stylesheet" href="modules/fontawesome-free-5.15.3-web/css/all.css">
+    <link rel="stylesheet" href="app-modules/bootstrap/bootstrap4.css">
+    <link rel="stylesheet" href="app-modules/fontawesome-free-5.15.3-web/css/all.css">
 
 </head>
 
@@ -27,38 +27,44 @@
         <div class="content-container container-fluid">
             <div class="row">
                 <div class="col-lg-12">
+                    <!-- ******************************************************************************************** -->
+                    <!-- ***                                  (User List)                                         *** -->
+                    <!-- ******************************************************************************************** -->
                     <div class="panel users-list">
-                        <h1>Users List</h1>
+                        <h1 class="header">Users List</h1>
                         <a type="button" class="action-link add-user btn btn-primary" data-router-state="user-edit"
                             href="#">
                             <i class="fas fa-plus p-1"></i>Add</a>
                     </div>
+                    <!-- ******************************************************************************************** -->
+                    <!-- ***                                  (User Edit)                                         *** -->
+                    <!-- ******************************************************************************************** -->
                     <div class="panel user-edit">
-                        <h1>User Edit</h1>
-                        <a type="button" class="action-link u-ok btn btn-success" data-router-state="users-list"
-                            href="#">ok</a>
-                        <a type="button" class="action-link u-cancle btn btn-danger" data-router-state="users-list"
-                            href="#">cancle</a>
+                        <h1 class="header">User Edit</h1>
+                        <a type="button" class="action-link u-ok btn btn-success mr-2 mt-5 px-3"
+                            data-router-state="users-list" href="#">ok</a>
+                        <a type="button" class="action-link u-cancle btn btn-light mt-5 px-3"
+                            data-router-state="users-list" href="#">cancel</a>
                     </div>
+                    <!-- ******************************************************************************************** -->
+                    <!-- ***                                  (Patient List)                                      *** -->
+                    <!-- ******************************************************************************************** -->
                     <div class="panel patient-list">
                         <h1 class="header">Patients</h1>
                         <a type="button" class="update action-link btn
                                   btn-primary add-patient" data-router-state="patient-edit" data-name="add" href="#"><i
                                 class="fas fa-plus p-1"></i>Add</a>
-
-
-
                         <table class="patients-table table table-sm table-striped ">
                             <thead class="patients-table-head">
                                 <tr>
                                     <th>ID</th>
                                     <th>name</th>
-                                    <th>DOB</th>
-                                    <th>gender</th>
                                     <th>email</th>
+                                    <th>gender</th>
+                                    <th>DOB</th>
                                     <th>Active</th>
+                                    <th>Status</th>
                                     <th>creationDate</th>
-                                    <th>CreatedBy</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -69,178 +75,178 @@
                             <tr data-id="{{ID}}">
                                 <td>{{ID}}</td>
                                 <td>{{fname}} {{mname}} {{lname}}</td>
-                                <td>{{DOB}}</td>
-                                <td>{{gender}}</td>
                                 <td>{{email}}</td>
+                                <td>{{gender,gender}}</td>
+                                <td>{{DOB,date}}</td>
                                 <td>{{Active}}</td>
-                                <td>{{creationDate}}</td>
-                                <td>{{CreatedBy}}</td>
-                                <td> <a type="button" class="update patient-edit-button action-link btn
+                                <td>{{status,status}}</td>
+                                <td>{{creationDate,date,dd/mm/yyyy}}</td>
+                                <td width="200px"> <a type="button" class="update patient-edit-button action-link btn
                                       btn btn-primary" data-router-state="patient-edit" data-name="edit" href="#">
-                                        <i class="fas fa-pencil-alt"></i> Edit</a></td>
+                                        <i class="fas fa-pencil-alt"></i> Edit</a>
+                                    <a type="button" class="delete btn btn-danger" href="#">
+                                        <i class="far fa-trash-alt"></i> Delete</a>
+                                </td>
                             </tr>
                         </template>
                     </div>
-
-
+                    <!-- ******************************************************************************************** -->
+                    <!-- ***                                  (Patient Edit)                                      *** -->
+                    <!-- ******************************************************************************************** -->
                     <div class="panel patient-edit">
                         <h1 class="header">patient: (new)</h1>
                         <form action="" class="patientForm row was-validated">
                             <div class="col-lg-4">
 
-                                <div class="row form-group">
+                                <div class="row">
                                     <div class="col-lg-5">
                                         <label for="fname" class="mb-1">First Name</label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <input type="text" id="fname"  name="fname" class="form-control fname mb-1" required>
+                                        <input type="text" id="fname" name="fname" class=" fname mb-1">
                                         <span class="fnameErrorComment validationComment">please fill out this
                                             field</span>
-
-
                                     </div>
                                 </div>
-                                <div class="row  form-group">
+
+                                <div class="row ">
                                     <div class="col-lg-5">
                                         <label for="mname" class="mb-1">Middle Name</label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <input type="text" id="mname" name="mname" class="form-control mname mb-1" required>
+                                        <input type="text" id="mname" name="mname" class=" mname mb-1">
                                         <span class="mnameErrorComment validationComment">please fill out this
                                             field</span>
-
                                     </div>
                                 </div>
-                                <div class="row  form-group">
+
+                                <div class="row ">
                                     <div class="col-lg-5">
                                         <label for="lname" class="mb-1">Last Name</label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <input type="text" id="lname" name="lname" class="form-control lname mb-1" required>
+                                        <input type="text" id="lname" name="lname" class=" lname mb-1">
                                         <span class="lnameErrorComment validationComment">please fill out this
                                             field</span>
                                     </div>
                                 </div>
-                                <div class="row  form-group">
+
+                                <div class="row ">
                                     <div class="col-lg-5">
                                         <label for="status" class="mb-1">Status</label>
                                     </div>
                                     <div class="col-lg-7 ">
-                                        <select id="status" name="status" class="custom-select status mb-1" required>
+                                        <select id="status" name="status" class=" status mb-1">
                                             <option value="1">Active</option>
                                             <option name="active" value="0">not Active</option>
                                         </select>
                                         <span class="statusErrorComment validationComment">please fill out this
                                             field</span>
-
                                     </div>
                                 </div>
+
                                 <div class="row">
-                                    <div class="col-lg-5 form-check">
-                                        <label class="form-check-label mb-5" for="active">Active</label>
+                                    <div class="col-lg-5 ">
+                                        <label class="-label mb-5" for="active">Active</label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <input type="checkbox"  id="active" class="form-check-input active mb-5 ml-1"
-                                            name="active">
-
+                                        <input type="checkbox" id="active" class=" active mb-5 ml-1" name="active">
                                     </div>
                                 </div>
+
                                 <div class="row">
-                                    <div class="col-lg-6">
-                                        <button type="button" class=" btn btn-primary  p-save mt-5 px-4 "
+                                    <div class="col-lg-10">
+                                        <button type="button" class=" btn btn-primary  p-save mr-2 mt-1 px-3 "
                                             data-router-state="patient-list"><i class="far fa-save pr-1"></i>
                                             Save</button>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <button class="btn btn-danger action-link p-cancle mt-5 px-4"
-                                            data-router-state="patient-list"> Cancle</button>
+                                        <button class="btn btn-light action-link p-cancle mt-1 px-3"
+                                            data-router-state="patient-list">Cancel</button>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-lg-1"></div>
                             <div class="col-lg-4">
-                                <div class="row form-group">
+                                <div class="row">
                                     <div class="col-lg-5">
                                         <label for="email" class="mb-1">Email</label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <input type="email" id="email" name="email" class="form-control email mb-1" required>
+                                        <input type="email" id="email" name="email" class=" email mb-1">
                                         <span class="emailErrorComment validationComment">please fill out this
                                             field</span>
-
                                     </div>
                                 </div>
 
-                                <div class="row form-group">
+                                <div class="row">
                                     <div class="col-lg-5">
                                         <label for="age" class="mb-1">Date of Birth</label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <input type="date" id="DOB" name="DOB" class="form-control DOB mb-1" required>
+                                        <input type="date" id="DOB" name="DOB" class=" DOB mb-1">
                                         <span class="DOBErrorComment validationComment">please select a date</span>
-
                                     </div>
                                 </div>
 
-                                <div class="row form-group">
+                                <div class="row">
                                     <div class="col-lg-5">
                                         <label for="check" class="mb-1">Last check</label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <input type="date" id="check" name="check" class="form-control check mb-1" required>
+                                        <input type="date" id="check" name="check" class=" check mb-1">
                                         <span class="lastCheckErrorComment validationComment">please select a
                                             date</span>
-
                                     </div>
                                 </div>
-
 
                                 <div class="row">
                                     <div class="col-lg-5">
                                         <label for="gender" class="mt-1">Gender</label>
-
                                     </div>
                                     <div class="col-lg-7 gender">
                                         <input type="radio" id="gender" class="gender" name="1" value="male"> Male
-                                        <input type="radio" id="gender" class="gender" name="2" value="female" class="ml-4">Female
+                                        <input type="radio" id="gender" class="gender" name="2" value="female"
+                                            class="ml-4">Female
                                         <span class="genderErrorComment validationComment">please select a gender</span>
-
                                     </div>
                                 </div>
-                                <div class="row form-group">
+
+                                <div class="row">
                                     <div class="col-lg-5">
                                         <label for="age" class="mb-1">Age</label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <input type="number" id="age" name="age" class="form-control age mb-1" min="6"
-                                            max="130" required>
+                                        <input type="number" id="age" name="age" class=" age mb-4" min="6" max="130">
                                         <span class="ageErrorComment validationComment">please fill out this
                                             field</span>
-
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-7">
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <button type="button" class=" btn btn-danger  p-delete ml-4 mt-1  px-3 ">
+                                            <i class="far fa-trash-alt"></i>Delete</button>
                                     </div>
                                 </div>
                         </form>
-
-
                     </div>
-
-
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="modules/jquery-3.6.0.min.js"></script>
-    <script src="modules/bootstrap4.js"></script>
+    <script src="app-modules/jquery/jquery-3.6.0.min.js"></script>
+    <script src="app-modules/moment.min.js"></script>
+    <script src="app-modules/bootstrap/bootstrap4.js"></script>
     <script src="app/data/patientData_JSON.js"></script>
     <script src="app/main.js"></script>
-    <script src="app/Patient/patient-list.js"></script>
+    <script src="app/Patients/patient-list.js"></script>
     <script src="app/Utiles/template-engine.js"></script>
     <script src="app/Utiles/data-service.js"></script>
-    <script src="app/Patient/patient-edit.js"></script>
-    <script src="app/User/user-list.js"></script>
-    <script src="app/User/user-edit.js"></script>
+    <script src="app/Patients/patient-edit.js"></script>
+    <script src="app/Users/user-list.js"></script>
+    <script src="app/Users/user-edit.js"></script>
     <script src="app/Utiles/router-engine.js"></script>
 
 </body>

@@ -2,11 +2,12 @@
     box-sizing: border-box;
 }
 .body-container {
-    padding-left: 250px;   
+    margin: 0;
+    padding: 0;
+    padding-left: 200px;   
 }
 .content-container {
     width: 100%;
-    padding: 20px;
     position: relative;
 }
 .patient-list {
@@ -15,8 +16,7 @@
     padding: 15px;
 }
 .header{
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin: 10px 0;
 }
 .patients-table th,
 .patients-table td {
@@ -24,8 +24,7 @@
 }
 .add-patient,.add-user,.cancle,.danger {
   float: right;
-  margin: 20px;
-  padding: 0px 20px;
+  margin: 10px 0;
 }
 .patients-table th,
 .patients-table td {
@@ -37,7 +36,6 @@
 .patient-edit,
 .users-list,
 .user-edit
-
 {
     display: none;
 }
@@ -45,5 +43,4 @@
     display: none;
     color: rgb(214, 29, 29);
     font-size: small;
-    
 }

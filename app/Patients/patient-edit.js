@@ -6,12 +6,15 @@ class patientEditClass {
 
     init = () => {
         $(".p-save").click(this.onSaveButtonClick);
+        $(".p-delete").click(this.onDeleteButtonClick);
     }
 
     show = (ID) => {
         if (!ID) {
+            debugger;
             this.formMode = "new";
             this.patientId = null;
+            $(".p-delete")[0].disabled = true;
             this.resetDataForm();
         } else {
             this.formMode = "edit";
@@ -24,14 +27,23 @@ class patientEditClass {
 
     onSaveButtonClick = () => {
         const patient = this.getFormControlsData();
+        //--------------------
+        //** Validation
         if (!this.validateForm(patient)) {
-            return (false);
+            return;
         }
+        //-------------------
         if (this.formMode == "edit") {
-            dataService.update(patient, this.patientId);
+            dataService.update(this.patientId, patient);
         } else {
             dataService.add(patient);
         }
+        //------------------
+        patientList.show();
+    }
+
+    onDeleteButtonClick = () => {
+        dataService.delete(this.patientId);
         patientList.show();
     }
 
@@ -40,13 +52,11 @@ class patientEditClass {
         $(".mname").val(patient.mname);
         $(".lname").val(patient.lname);
         $(".status").val(patient.status);
-        $(".form-check-input").attr('checked',patient.Active);
+        $(".form-check-input").attr('checked', patient.Active);
         $(".email").val(patient.email);
-        let date = patient.DOB;
-        date = date.toISOString().substr(0, 10);
+        const date = moment(patient.DOB).format("YYYY-MM-DD");
         $(".DOB").val(date);
-        let lastCheckDate = patient.lastCheck;
-        lastCheckDate = lastCheckDate.toISOString().substr(0, 10);
+        const lastCheckDate = moment(patient.lastCheck).format("YYYY-MM-DD");
         $(".check").val(lastCheckDate);
         const gender = patient.gender;
         if (gender == "1") {
@@ -87,6 +97,7 @@ class patientEditClass {
         };
         return newPatient
     }
+
     resetDataForm = () => {
         $(".fname").val("");
         $(".mname").val("");
@@ -99,43 +110,44 @@ class patientEditClass {
         $("[name='1']").attr('checked', false);
         $("[name='2']").attr('checked', false);
     }
-    validateForm = (patient) => {
-        const isValid = true;
+    
+    validateForm = () => {
+        let isValid = true;
         $(".validationComment").hide();
-        if (patient.age == "" || isNaN(patient.age) || patient.age < 6 || patient.age > 130) {
-            $(".ageErrorComment").show();
-            isValid = false;
-        }
-        if (patient.fname == "") {
+        if ($(".fname").val() == "") {
             $(".fnameErrorComment").show();
             isValid = false;
         }
-        if (patient.mname == "") {
+        if ($(".mname").val() == "") {
             $(".mnameErrorComment").show();
             isValid = false;
         }
-        if (patient.lname == "") {
+        if ($(".lname").val() == "") {
             $(".lnameErrorComment").show();
             isValid = false;
         }
-        if (patient.status == "") {
+        if ($(".status").val() == null) {
             $(".statusErrorComment").show();
             isValid = false;
         }
-        if (patient.email == "") {
+        if ($(".email").val() == "") {
             $(".emailErrorComment").show();
             isValid = false;
         }
-        if (patient.DOB == "") {
+        if ($(".DOB").val() == "") {
             $(".DOBErrorComment").show();
             isValid = false;
         }
-        if (patient.lastCheck == "") {
+        if ($(".check").val() == "") {
             $(".lastCheckErrorComment").show();
             isValid = false;
         }
-        if (patient.gender == "") {
+        if ($("input[type='radio']:checked").val() == undefined) {
             $(".genderErrorComment").show();
+            isValid = false;
+        }
+        if ($(".age").val() == "" || isNaN($(".age").val()) || $(".age").val() < 6 || $(".age").val() > 130) {
+            $(".ageErrorComment").show();
             isValid = false;
         }
 

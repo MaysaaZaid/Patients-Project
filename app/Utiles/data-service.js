@@ -8,8 +8,18 @@ class dataServiceClass {
     get = (ID) => {
         return patientsData.find(element => element.ID == ID);
     }
-    update = (newPatient, newPatientID) => {
-        const oldPatient = this.get(newPatientID)
+    getIndexById = (ID) => {
+        const patient = patientsData.find(element => element.ID == ID);
+        return patientsData.indexOf(patient)
+    }
+    add = (patient) => {
+        const newPatientId = this.getNewId();
+        patient.ID = newPatientId;
+        patientsData.push(patient);
+    }
+    update = (ID, newPatient) => {
+        const oldPatient = this.get(ID)
+        debugger;
         oldPatient.fname = newPatient.fname;
         oldPatient.mname = newPatient.mname;
         oldPatient.lname = newPatient.lname;
@@ -22,18 +32,15 @@ class dataServiceClass {
         oldPatient.creationDate = newPatient.creationDate;
         oldPatient.CreatedBy = newPatient.CreatedBy;
     }
-
-    add = (patient) => {
-        const newPatientId = this.getNewId();
-        patient.ID = newPatientId;
-        patientsData.push(patient);
+    delete = (ID) => {
+        const userConfirmation = confirm(" Are you sure you want to delete this patient ?")
+        if (userConfirmation) {
+            const patientIndex = this.getIndexById(ID);
+            patientsData.splice(patientIndex, 1);
+        } else {
+            return;
+        }
     }
-
-    getIndexById = (ID) => {
-        const patient = patientsData.find(element => element.ID == ID);
-        return patientsData.indexOf(patient)
-    }
-
     getNewId = () => {
         let max = patientsData[0].ID;
         patientsData.forEach(element => {

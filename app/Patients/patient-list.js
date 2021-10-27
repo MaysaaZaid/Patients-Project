@@ -5,7 +5,7 @@ class patientListClass {
         this.show();
     }
 
-    show =()=>{
+    show = () => {
         this.renderTable();
         routerEngine.navigate("patient-list")
     }
@@ -20,6 +20,7 @@ class patientListClass {
             $(".patients-table-body").append(tableEle);
         }
         this.addEditClickEvent();
+        this.addDeleteClickEvent();
     }
 
     addEditClickEvent = () => {
@@ -28,10 +29,23 @@ class patientListClass {
         )
     }
 
+    addDeleteClickEvent = () => {
+        $(".delete").click(
+            this.onDeletePatientClick
+        )
+    }
+
     onEditPatientClick = (e) => {
         const editRow = $(e.target).closest("tr");
         const ID = editRow.data("id");
         patientEdit.show(ID);
+    }
+
+    onDeletePatientClick(e) {
+        const deleteRow = $(e.target).closest("tr");
+        const ID = deleteRow.data("id");
+        dataService.delete(ID);
+        patientList.show();
     }
 
     onAddPatientClick() {
