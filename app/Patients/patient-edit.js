@@ -11,7 +11,6 @@ class patientEditClass {
 
     show = (ID) => {
         if (!ID) {
-            debugger;
             this.formMode = "new";
             this.patientId = null;
             $(".p-delete")[0].disabled = true;
@@ -22,13 +21,14 @@ class patientEditClass {
             const patient = dataService.get(ID);
             this.loadFormControls(patient);
         }
-        routerEngine.navigate("patient-edit")
+        routerEngine.navigate("patient-edit");
     }
 
     onSaveButtonClick = () => {
         const patient = this.getFormControlsData();
         //--------------------
         //** Validation
+        
         if (!this.validateForm(patient)) {
             return;
         }
@@ -92,10 +92,11 @@ class patientEditClass {
         }
         const newPatient = {
             fname: patientFirstName, mname: patientMiddleName, lname: patientLastName,
-            DOB: patientDOB, gender: patientGender, email: patientEmail, age: patientAge, lastCheck: patientLastCheck,
-            status: patientStatus, Active: patientActive, creationDate: patientLastCheck, CreatedBy: 1
+            DOB: patientDOB, gender: patientGender, email: patientEmail, age: patientAge,
+            lastCheck: patientLastCheck, status: patientStatus, Active: patientActive,
+            creationDate: patientLastCheck, CreatedBy: 1
         };
-        return newPatient
+        return newPatient;
     }
 
     resetDataForm = () => {
@@ -110,49 +111,60 @@ class patientEditClass {
         $("[name='1']").attr('checked', false);
         $("[name='2']").attr('checked', false);
     }
-    
+
     validateForm = () => {
         let isValid = true;
         $(".validationComment").hide();
+        $(".fname,.mname,.lname,.status,.email,.DOB,.check,.age").removeClass("is-invalid");
         if ($(".fname").val() == "") {
             $(".fnameErrorComment").show();
+            $(".fname").addClass("is-invalid");
             isValid = false;
         }
         if ($(".mname").val() == "") {
             $(".mnameErrorComment").show();
+            $(".mname").addClass("is-invalid");
             isValid = false;
         }
         if ($(".lname").val() == "") {
             $(".lnameErrorComment").show();
+            $(".lname").addClass("is-invalid");
             isValid = false;
         }
         if ($(".status").val() == null) {
             $(".statusErrorComment").show();
+            $(".status").addClass("is-invalid");
             isValid = false;
         }
-        if ($(".email").val() == "") {
+        const email = $(".email").val()
+        const number=email.search(/[A-z0-9\.]+@[A-z0-9]+\.[A-z]+$/g);
+        if (number == -1) {
             $(".emailErrorComment").show();
+            $(".email").addClass("is-invalid");
             isValid = false;
         }
         if ($(".DOB").val() == "") {
             $(".DOBErrorComment").show();
+            $(".DOB").addClass("is-invalid");
             isValid = false;
         }
         if ($(".check").val() == "") {
             $(".lastCheckErrorComment").show();
+            $(".check").addClass("is-invalid");
             isValid = false;
         }
-        if ($("input[type='radio']:checked").val() == undefined) {
+        if ($("input[class='gender']:checked").val() == undefined) {
             $(".genderErrorComment").show();
             isValid = false;
         }
         if ($(".age").val() == "" || isNaN($(".age").val()) || $(".age").val() < 6 || $(".age").val() > 130) {
             $(".ageErrorComment").show();
+            $(".age").addClass("is-invalid")
             isValid = false;
         }
 
-        return isValid
-    }
+        return isValid;
+    } 
 }
 
 const patientEdit = new patientEditClass();
