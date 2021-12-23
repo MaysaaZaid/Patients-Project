@@ -47,7 +47,8 @@
 .errorBox{
     display: none;
     width: 700px;
-    border: 5px solid red;
+    color:white;
+    background-color:#b30000;
     text-align:center;
     padding: 10px;
     margin: 20px;
