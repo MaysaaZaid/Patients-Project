@@ -6,10 +6,11 @@ class patientEditClass {
 
     init = () => {
         $(".p-save").click(this.onSaveButtonClick);
-        $(".p-delete").click(this.onDeleteButtonClick);
+        $(".confirm-btn").click(this.onConfirmButtonClick);
     }
 
     show = (ID) => {
+        this.initializeValidation();
         if (!ID) {
             this.formMode = "new";
             this.patientId = null;
@@ -26,10 +27,12 @@ class patientEditClass {
 
     onSaveButtonClick = () => {
         const patient = this.getFormControlsData();
+        this.initializeValidation();
         //--------------------
         //** Validation
-        
-        if (!this.validateForm(patient)) {
+        if (!validationEngine.validateForm()) {
+         dataService.toastr();
+            toastr["error"]("Save failed", "error");
             return;
         }
         //-------------------
@@ -41,7 +44,6 @@ class patientEditClass {
         //------------------
         patientList.show();
     }
-
     onDeleteButtonClick = () => {
         dataService.delete(this.patientId);
         patientList.show();
@@ -60,9 +62,9 @@ class patientEditClass {
         $(".check").val(lastCheckDate);
         const gender = patient.gender;
         if (gender == "1") {
-            $("[name='1']").attr('checked', true);
+            $(".male").attr('checked', true);
         } else {
-            $("[name='2']").attr('checked', true);
+            $(".female").attr('checked', true);
         }
     }
 
@@ -91,10 +93,18 @@ class patientEditClass {
             patientActive = "false";
         }
         const newPatient = {
-            fname: patientFirstName, mname: patientMiddleName, lname: patientLastName,
-            DOB: patientDOB, gender: patientGender, email: patientEmail, age: patientAge,
-            lastCheck: patientLastCheck, status: patientStatus, Active: patientActive,
-            creationDate: patientLastCheck, CreatedBy: 1
+            fname: patientFirstName,
+            mname: patientMiddleName,
+            lname: patientLastName,
+            DOB: patientDOB,
+            gender: patientGender,
+            email: patientEmail,
+            age: patientAge,
+            lastCheck: patientLastCheck,
+            status: patientStatus,
+            Active: patientActive,
+            creationDate: patientLastCheck,
+            CreatedBy: 1
         };
         return newPatient;
     }
@@ -108,63 +118,20 @@ class patientEditClass {
         $(".email").val("");
         $(".DOB").val("");
         $(".check").val("");
-        $("[name='1']").attr('checked', false);
-        $("[name='2']").attr('checked', false);
+        $("[name='gender']").prop('checked', false);
+        $(".age").val("");
     }
-
-    validateForm = () => {
-        let isValid = true;
-        $(".validationComment").hide();
-        $(".fname,.mname,.lname,.status,.email,.DOB,.check,.age").removeClass("is-invalid");
-        if ($(".fname").val() == "") {
-            $(".fnameErrorComment").show();
-            $(".fname").addClass("is-invalid");
-            isValid = false;
-        }
-        if ($(".mname").val() == "") {
-            $(".mnameErrorComment").show();
-            $(".mname").addClass("is-invalid");
-            isValid = false;
-        }
-        if ($(".lname").val() == "") {
-            $(".lnameErrorComment").show();
-            $(".lname").addClass("is-invalid");
-            isValid = false;
-        }
-        if ($(".status").val() == null) {
-            $(".statusErrorComment").show();
-            $(".status").addClass("is-invalid");
-            isValid = false;
-        }
-        const email = $(".email").val()
-        const number=email.search(/[A-z0-9\.]+@[A-z0-9]+\.[A-z]+$/g);
-        if (number == -1) {
-            $(".emailErrorComment").show();
-            $(".email").addClass("is-invalid");
-            isValid = false;
-        }
-        if ($(".DOB").val() == "") {
-            $(".DOBErrorComment").show();
-            $(".DOB").addClass("is-invalid");
-            isValid = false;
-        }
-        if ($(".check").val() == "") {
-            $(".lastCheckErrorComment").show();
-            $(".check").addClass("is-invalid");
-            isValid = false;
-        }
-        if ($("input[class='gender']:checked").val() == undefined) {
-            $(".genderErrorComment").show();
-            isValid = false;
-        }
-        if ($(".age").val() == "" || isNaN($(".age").val()) || $(".age").val() < 6 || $(".age").val() > 130) {
-            $(".ageErrorComment").show();
-            $(".age").addClass("is-invalid")
-            isValid = false;
-        }
-
-        return isValid;
-    } 
+     onConfirmButtonClick = () =>{
+        dataService.delete(this.patientId);  
+        patientList.show();
+        dataService.toastr();
+        toastr["success"]("patient removed successfully", "Done");
+    }
+    initializeValidation = () => {
+        $(".error-message").hide();
+        $(".errorBox").text("");
+        $("[data-validation]").removeClass("is-invalid");
+    }
 }
 
 const patientEdit = new patientEditClass();

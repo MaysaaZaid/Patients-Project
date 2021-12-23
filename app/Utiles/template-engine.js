@@ -7,7 +7,7 @@ class templateEngineClass {
     renderTemplate = (templateString, data) => {
         const item = templateString.match(/(?<={{).*?(?=}})/g);
         for (var i = 0; i < item.length; i++) {
-            const number = item[i].search(","); //to know if the value want to be formatted
+            const number = item[i].search(","); //to check if the value want to be formatted
             const bracketTemplateStringItems = "{{" + item[i] + "}}";
             if (number == -1) {
                 const value = data[item[i]];
@@ -15,11 +15,12 @@ class templateEngineClass {
             } else {
                 const templateStringItemArray = bracketTemplateStringItems.match(/(?<={{|,).*?(?=}}|,)/g);
                 const value = data[templateStringItemArray[0]];
-                const formattedValue = this.formatValue(value, templateStringItemArray[1], templateStringItemArray[2]);
+                const formattedValue = this.formatValue(value, templateStringItemArray[1], 
+                    templateStringItemArray[2]);
                 templateString = templateString.replace(bracketTemplateStringItems, formattedValue);
             }
         }
-        return templateString
+        return templateString;
     }
 
     formatValue = (value, formatterName, formatterParameter) => {
@@ -44,16 +45,16 @@ class templateEngineClass {
     }
     genderPipe = (value) => {
         if (value == 1) {
-            return "male"
+            return "male";
         } else {
-            return "female"
+            return "female";
         }
     }
     statusPipe = (value) => {
         if (value == 0) {
-            return "not active"
+            return "not active";
         } else {
-            return "active"
+            return "active";
         }
     }
 }

@@ -2,7 +2,7 @@ class dataServiceClass {
     init = () => {
 
     }
-    getAll() {
+    getAll=() =>{
         return patientsData;
     }
     get = (ID) => {
@@ -10,16 +10,16 @@ class dataServiceClass {
     }
     getIndexById = (ID) => {
         const patient = patientsData.find(element => element.ID == ID);
-        return patientsData.indexOf(patient)
+        return patientsData.indexOf(patient);
     }
     add = (patient) => {
         const newPatientId = this.getNewId();
         patient.ID = newPatientId;
         patientsData.push(patient);
+        toastr["success"]("Patient added successfully", "Done");
     }
     update = (ID, newPatient) => {
-        const oldPatient = this.get(ID)
-        debugger;
+        const oldPatient = this.get(ID);
         oldPatient.fname = newPatient.fname;
         oldPatient.mname = newPatient.mname;
         oldPatient.lname = newPatient.lname;
@@ -31,15 +31,13 @@ class dataServiceClass {
         oldPatient.Active = newPatient.Active;
         oldPatient.creationDate = newPatient.creationDate;
         oldPatient.CreatedBy = newPatient.CreatedBy;
+        this.toastr();
+        toastr["success"]("Patient data modified successfully", "Done");
     }
     delete = (ID) => {
-        const userConfirmation = confirm(" Are you sure you want to delete this patient ?")
-        if (userConfirmation) {
             const patientIndex = this.getIndexById(ID);
-            patientsData.splice(patientIndex, 1);
-        } else {
-            return;
-        }
+            var removedObj=patientsData.splice(patientIndex, 1);
+            return removedObj;   
     }
     getNewId = () => {
         let max = patientsData[0].ID;
@@ -48,7 +46,26 @@ class dataServiceClass {
                 max = element.ID;
             }
         });
-        return max + 1
+        return max + 1;
     }
+    toastr = ()=>{
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-center",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "2000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+   }
+}
 }
 const dataService = new dataServiceClass();
