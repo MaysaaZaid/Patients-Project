@@ -32,8 +32,7 @@
                     <!-- ******************************************************************************************** -->
                     <div class="panel users-list">
                         <h1 class="header">Users List</h1>
-                        <a type="button" class="action-link add-user btn btn-primary" data-router-state="user-edit"
-                            href="#">
+                        <a type="button" class="action-link add-user btn btn-primary" data-router-state="user-edit" href="#">
                             <i class="fas fa-plus p-1"></i>Add</a>
                     </div>
                     <!-- ******************************************************************************************** -->
@@ -41,10 +40,8 @@
                     <!-- ******************************************************************************************** -->
                     <div class="panel user-edit">
                         <h1 class="header">User Edit</h1>
-                        <a type="button" class="action-link u-ok btn btn-success mr-2 mt-5 px-3"
-                            data-router-state="users-list" href="#">ok</a>
-                        <a type="button" class="action-link u-cancle btn btn-light mt-5 px-3"
-                            data-router-state="users-list" href="#">cancel</a>
+                        <a type="button" class="action-link u-ok btn btn-success mr-2 mt-5 px-3" data-router-state="users-list" href="#">ok</a>
+                        <a type="button" class="action-link u-cancle btn btn-light mt-5 px-3" data-router-state="users-list" href="#">cancel</a>
                     </div>
                     <!-- ******************************************************************************************** -->
                     <!-- ***                                  (Patient List)                                      *** -->
@@ -86,7 +83,8 @@
                                 <td width="200px"> <a type="button" class="update patient-edit-button action-link btn
                                       btn btn-primary" data-router-state="patient-edit" data-name="edit" href="#">
                                         <i class="fas fa-pencil-alt"></i> Edit</a>
-                                    <a type="button" class="delete btn btn-danger" href="#">
+                                    <a type="button" class="patient-list-delete-btn btn btn-danger" data-toggle="modal"
+                                        data-target="#myModal" href="#">
                                         <i class="far fa-trash-alt"></i> Delete</a>
                                 </td>
                             </tr>
@@ -107,8 +105,7 @@
                                         <label for="fname" class="mb-1">FirstName</label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <input type="text" id="fname" name="fname" class="form-control fname mb-1"
-                                            data-validation="required" data-name="FirstName">
+                                        <input type="text" id="fname" name="fname" class="form-control fname mb-1" data-validation="required" data-name="FirstName">
                                         <span class="fnameErrorComment error-message">please fill out this
                                             field</span>
                                     </div>
@@ -119,8 +116,7 @@
                                         <label for="mname" class="mb-1">MiddleName</label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <input type="text" id="mname" name="mname" class="form-control mname mb-1"
-                                            data-validation="required" data-name="MiddleName">
+                                        <input type="text" id="mname" name="mname" class="form-control mname mb-1" data-validation="required" data-name="MiddleName">
                                         <span class="mnameErrorComment error-message">please fill out this
                                             field</span>
                                     </div>
@@ -131,8 +127,7 @@
                                         <label for="lname" class="mb-1">LastName</label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <input type="text" id="lname" name="lname" class="form-control lname mb-1"
-                                            data-validation="required" data-name="LastName">
+                                        <input type="text" id="lname" name="lname" class="form-control lname mb-1" data-validation="required" data-name="LastName">
                                         <span class="lnameErrorComment error-message">please fill out this
                                             field</span>
                                     </div>
@@ -159,19 +154,16 @@
                                         <label class="form-check-label mb-5" for="active">Active</label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <input type="checkbox" id="active" class="form-check-input active mb-5 ml-1"
-                                            name="active">
+                                        <input type="checkbox" id="active" class="form-check-input active mb-5 ml-1" name="active">
 
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-lg-10">
-                                        <button type="button" class="btn btn-primary p-save mr-2 mt-1 px-3 "
-                                            data-router-state="patient-list"><i class="far fa-save pr-1"></i>
+                                        <button type="button" class="btn btn-primary p-save mr-2 mt-1 px-3 " data-router-state="patient-list"><i class="far fa-save pr-1"></i>
                                             Save</button>
-                                        <button type="button" class="btn btn-light action-link mt-1 px-3" 
-                                        data-router-state="patient-list">Cancel</button>
+                                        <button type="button" class="btn btn-light action-link mt-1 px-3" data-router-state="patient-list">Cancel</button>
                                     </div>
                                 </div>
                             </div>
@@ -183,8 +175,7 @@
                                         <label for="email" class="mb-1">Email</label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <input type="email" id="email" name="email" class="form-control email mb-1"
-                                            data-validation="email" data-name="Email">
+                                        <input type="email" id="email" name="email" class="form-control email mb-1" data-validation="email" data-name="Email">
                                         <span class="emailErrorComment error-message">please fill out this
                                             field</span>
                                     </div>
@@ -195,8 +186,7 @@
                                         <label for="age" class="mb-1">Date of Birth</label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <input type="date" id="DOB" name="DOB" class="form-control DOB mb-1"
-                                            data-validation="required" data-name="DOB">
+                                        <input type="date" id="DOB" name="DOB" class="form-control DOB mb-1" data-validation="required" data-name="DOB">
                                         <span class="DOBErrorComment error-message">please select a date</span>
                                     </div>
                                 </div>
@@ -206,8 +196,7 @@
                                         <label for="check" class="mb-1">Last check</label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <input type="date" id="check" name="check" class="form-control check mb-1"
-                                            data-validation="required" data-name="Last Check">
+                                        <input type="date" id="check" name="check" class="form-control check mb-1" data-validation="required" data-name="Last Check">
                                         <span class="lastCheckErrorComment error-message">please select a
                                             date</span>
                                     </div>
@@ -218,10 +207,8 @@
                                         <label for="gender" class="mt-1">Gender</label>
                                     </div>
                                     <div class="col-lg-7 gender">
-                                        <input type="radio" id="gender" class="male" name="gender" value="gender"
-                                            data-validation="requird" data-name="gender"> Male
-                                        <input type="radio" id="gender" class="female" name="gender" value="gender"
-                                            data-validation="required" data-name="gender" class="ml-4"> Female
+                                        <input type="radio" id="gender" class="male" name="gender" value="gender" data-validation="requird" data-name="gender"> Male
+                                        <input type="radio" id="gender" class="female" name="gender" value="gender" data-validation="required" data-name="gender" class="ml-4"> Female
                                         <br>
                                         <span class="genderErrorComment error-message">please select a gender</span>
                                     </div>
@@ -232,8 +219,7 @@
                                         <label for="age" class="mb-1">Age</label>
                                     </div>
                                     <div class="col-lg-7">
-                                        <input type="number" id="age" name="age" class="form-control age mb-2" min="6"
-                                            max="130" data-validation="number" data-name="Age">
+                                        <input type="number" id="age" name="age" class="form-control age mb-2" min="6" max="130" data-validation="number" data-name="Age">
                                         <span class="ageErrorComment error-message">please fill out this
                                             field</span>
                                     </div>
@@ -242,11 +228,13 @@
                                     <div class="col-lg-7">
                                     </div>
                                     <div class="col-lg-3">
-                                        <button type="button" class=" btn btn-danger ml-4 mt-1  px-3" data-toggle="modal"data-target="#myModal">
+                                        <button type="button" class=" btn btn-danger patient-edit-delete-btn ml-4 mt-1  px-3" data-toggle="modal" data-target="#myModal">
                                             <i class="far fa-trash-alt"></i> Delete</button>
                                     </div>
                                 </div>
                         </form>
+                        </div>
+
                     </div>
                     <!-- ******************************************************************************************** -->
                     <!-- ***                                  (Modal)                                               *** -->
@@ -256,14 +244,15 @@
                             <!-- Modal content-->
                             <div class="modal-content">
                                 <div class="modal-header">
+                                    <h4 class="modal-title">Delete Patient</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Delete patient</h4>
+
                                 </div>
                                 <div class="modal-body">
                                     <p>Are you sure you want to delete this patient ?</p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary  confirm-btn" data-dismiss="modal">yes</button>
+                                    <button type="button" class="btn btn-primary confirm-del-btn" data-dismiss="modal">yes</button>
                                     <button type="button" class="btn btn-default" data-dismiss="modal">no</button>
                                 </div>
                             </div>
@@ -273,9 +262,8 @@
             </div>
         </div>
     </div>
-</div>
-</div>
-</div>
+    </div>
+    </div>
 
     <script src="app-modules/jquery/jquery-3.6.0.min.js"></script>
     <script src="app-modules/moment.min.js"></script>

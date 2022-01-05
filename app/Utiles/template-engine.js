@@ -15,7 +15,7 @@ class templateEngineClass {
             } else {
                 const templateStringItemArray = bracketTemplateStringItems.match(/(?<={{|,).*?(?=}}|,)/g);
                 const value = data[templateStringItemArray[0]];
-                const formattedValue = this.formatValue(value, templateStringItemArray[1], 
+                const formattedValue = this.formatValue(value, templateStringItemArray[1],
                     templateStringItemArray[2]);
                 templateString = templateString.replace(bracketTemplateStringItems, formattedValue);
             }

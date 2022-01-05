@@ -9,11 +9,13 @@ class validationEngineClass {
         for (var i = 0; i < validationControls.length; i++) {
             let component = $(validationControls[i]);
             let validationInputValue = component.val();
-            let validationInputType = component.data("validation");
+            let validationType = component.data("validation");
             let validationInputName = component.data("name");
-            switch (validationInputType) {
+            let inputType = component.attr("type");
+
+            switch (validationType) {
                 case "required":
-                    if (!this.validateRequireField(validationInputType, validationInputValue)) {
+                    if (!this.validateRequireField(inputType, validationInputValue)) {
                         errorBox += validationInputName + ",";
                         this.showError(component);
                         isValid = false;
@@ -40,24 +42,16 @@ class validationEngineClass {
         }
         return isValid;
     }
-
     validateRequireField = (type, value) => {
         let isValid = true;
         switch (true) {
             case (type == "radio"):
-                var radioInputValue = $("input[class=" + value + "]:checked").val();
-                if (radioInputValue == undefined) {
-                    isValid = false;
-                } else {
-                    isValid = true;
-                }
+                debugger
+                var radioInputValue = $("input[name=" + value + "]:checked").val();
+                isValid = (radioInputValue !== undefined)
                 break;
             case (type != "radio"):
-                if (value == "" || value == null) {
-                    isValid = false;
-                } else {
-                    isValid = true;
-                }
+                isValid = (value !== "");
                 break;
         }
         return isValid;
@@ -65,19 +59,13 @@ class validationEngineClass {
 
     validatePositiveNumberField = (value) => {
         let pattern = /^[1-9]\d*/g;
-        if (pattern.test(value) && value !== '') {
-            return true;
-        } else {
-            return false;
-        }
+        const valid = pattern.test(value);
+        return valid
     }
     validateEmailField = (email) => {
-        let number = email.search(/[A-z0-9\.]+@[A-z0-9]+\.[A-z]+$/g);
-        if (email != "" && number == -1) {
-            return false;
-        } else {
-            return true;
-        }
+        let number = email.search(/[A-inputType0-9\.]+@[A-inputType0-9]+\.[A-inputType]+$/g);
+        const valid = (email == "" || number !== -1);
+        return valid;
     }
     showError = (component) => {
         component.addClass("is-invalid");

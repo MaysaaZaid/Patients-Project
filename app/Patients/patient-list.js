@@ -20,7 +20,6 @@ class patientListClass {
             $(".patients-table-body").append(tableEle);
         }
         this.addEditClickEvent();
-        this.addDeleteClickEvent();
     }
 
     addEditClickEvent = () => {
@@ -28,30 +27,14 @@ class patientListClass {
             this.onEditPatientClick
         )
     }
-
-    addDeleteClickEvent = () => {
-        $(".delete").click(
-            this.onDeletePatientClick
-        )
-    }
-
     onEditPatientClick = (e) => {
         const editRow = $(e.target).closest("tr");
         const ID = editRow.data("id");
         patientEdit.show(ID);
     }
-
-    onDeletePatientClick(e) {
-        const deleteRow = $(e.target).closest("tr");
-        const ID = deleteRow.data("id");
-        dataService.delete(ID);
-        patientList.show();
-    }
-
     onAddPatientClick() {
         patientEdit.show();
     }
 }
 
 const patientList = new patientListClass();
-

@@ -6,7 +6,25 @@ class patientEditClass {
 
     init = () => {
         $(".p-save").click(this.onSaveButtonClick);
-        $(".confirm-btn").click(this.onConfirmButtonClick);
+        $(".modal").on("show.bs.modal", this.onModalShow);
+        $(".confirm-del-btn").click(this.onConfirmDeleteButtonClick);
+    }
+    onModalShow = (e) => {
+        const relatedButton = $(e.relatedTarget);
+        let id;
+        if (relatedButton.hasClass("patient-edit-delete-btn")) {
+            id = this.patientId;
+
+        } else {
+            const selectedRow = relatedButton.closest("tr");
+            id = selectedRow.data("id");
+        }
+        $(".confirm-del-btn").data('id', id)
+    }
+    onConfirmDeleteButtonClick = (e) => {
+        const ID = $(e.target).data("id");
+        dataService.delete(ID);
+        patientList.show();
     }
 
     show = (ID) => {
@@ -14,7 +32,7 @@ class patientEditClass {
         if (!ID) {
             this.formMode = "new";
             this.patientId = null;
-            $(".p-delete")[0].disabled = true;
+            $(".patient-edit-delete-btn")[0].disabled = true;
             this.resetDataForm();
         } else {
             this.formMode = "edit";
@@ -31,7 +49,7 @@ class patientEditClass {
         //--------------------
         //** Validation
         if (!validationEngine.validateForm()) {
-         dataService.toastr();
+            dataService.toastr();
             toastr["error"]("Save failed", "error");
             return;
         }
@@ -56,6 +74,7 @@ class patientEditClass {
         $(".status").val(patient.status);
         $(".form-check-input").attr('checked', patient.Active);
         $(".email").val(patient.email);
+        $(".age").val("");
         const date = moment(patient.DOB).format("YYYY-MM-DD");
         $(".DOB").val(date);
         const lastCheckDate = moment(patient.lastCheck).format("YYYY-MM-DD");
@@ -79,10 +98,8 @@ class patientEditClass {
         let patientGender = "";
         if (gender == "male") {
             patientGender = "1";
-        } else if (gender == "female") {
-            patientGender = "2";
         } else {
-            patientGender = "";
+            patientGender = "2";
         }
         const patientDOB = $(".DOB").val();
         const patientLastCheck = $(".check").val();
@@ -121,8 +138,8 @@ class patientEditClass {
         $("[name='gender']").prop('checked', false);
         $(".age").val("");
     }
-     onConfirmButtonClick = () =>{
-        dataService.delete(this.patientId);  
+    onConfirmButtonClick = () => {
+        dataService.delete(this.patientId);
         patientList.show();
         dataService.toastr();
         toastr["success"]("patient removed successfully", "Done");
@@ -135,6 +152,3 @@ class patientEditClass {
 }
 
 const patientEdit = new patientEditClass();
-
-
-
